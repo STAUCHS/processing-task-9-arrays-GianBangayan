@@ -3,6 +3,7 @@
 
   public class Sketch extends PApplet {
 
+    //define variables and arrays
     float[] snowX = new float[42];
     float[] snowY = new float[42];  
     boolean[] snowVis = new boolean[42];
@@ -13,19 +14,28 @@
     boolean alive = true;
     boolean mouseClick = false;
 
+    //set the game's window
     public void settings() {
       size(400, 400);
     }
 
+    /** 
+     * Sets up the positions of snow and sets their visibility to true
+     * @author G. Bangayan
+    */
     public void setup() {
       genRand();
       for(int i = 0; i < snowVis.length; i++){
         snowVis[i] = true;
-        System.out.print(snowVis[i]);
       }
     }
 
+    /**
+     * runs all the main game functions
+     */
     public void draw() {
+
+      //checks if player is alive, if not turn screen white
       if(alive == false){
         background(255);
       }
@@ -37,6 +47,10 @@
       }
     }
 
+    /**
+     * generates random positions for the snow balls upon creation
+     * @author G. Bangayan
+    */
     public void genRand(){
       for (int i=0; i< snowX.length;i++){
         snowX[i] = random(width);
@@ -44,6 +58,13 @@
       }
     }
       
+    /**
+     * checks for key inputs to make snow speed up or slow down
+     * resets position of snow once it reaches the bottom
+     * checks for player/snow collisions and resets snow and decreases life if true
+     * checks for cursor clicks/snow collisions and resets snow position
+     * @author G. Bangayan
+     */
     public void snow(){
       fill(255);
       double speed = 1;
@@ -81,10 +102,19 @@
       }
     }
 
+    /**
+     * Checks for cursor clicks
+     * @author G. Bangayan
+     */
     public void mouseClicked(){
       mouseClick = true;
     }
 
+    /**
+     * allows player to move around with WASD keys
+     * teleports player to other side of window if they go too far
+     * @author G. Bangayan
+     */
     public void player(){
       fill(0,0,255);
       ellipse(playerX, playerY, 30, 30);
@@ -116,6 +146,10 @@
       }
     }
 
+    /**
+     * Displays lives and kills player once all lives are used
+     * @author G. Bangayan
+     */
     public void lives(){
       fill(255,0,0);
       if(playerLives == 3){
